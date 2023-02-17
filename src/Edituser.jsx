@@ -75,7 +75,7 @@ function Edituser() {
                         <div className="col-lg-8">
                             <div className="p-5">
                                 <div className="text-center">
-                                    <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                    <h1 className="h4 text-gray-900 mb-4">Edit an Account!</h1>
                                 </div>
                                 <form className="user" onSubmit={formik.handleSubmit}>
                                     <div className="form-group row">
