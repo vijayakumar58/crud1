@@ -1,10 +1,11 @@
-import axios from 'axios';
-import { useFormik } from 'formik';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import { useFormik } from 'formik'
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import './App.css'
 
-function Createuser() {
+function Edituser() {
+    const params = useParams()
     const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
@@ -38,11 +39,32 @@ function Createuser() {
             return errors
         },
         onSubmit: async (values) => {
-            let user = await axios.post(`https://6379a4bd7eb4705cf282a5b9.mockapi.io/users`, values)
-            alert("User Created")
-            navigate("/Portal/Users")
+            let user = await axios.put(`https://6379a4bd7eb4705cf282a5b9.mockapi.io/users/${params.id}`, values)
+            alert("User Updated")
+            navigate ("/Portal/Users")
         }
-    })
+    });
+
+    useEffect(() => {
+      loadUser ()
+    }, [])
+
+    let loadUser = async () => {
+        try {
+           let user = await axios.get(`https://6379a4bd7eb4705cf282a5b9.mockapi.io/users/${params.id}`)
+           formik.setValues ({
+            name: user.data.name,
+            position: user.data.position,
+            office: user.data.office,
+            age: user.data.age,
+            startdate: user.data.startdate,
+            salarey: user.data.salarey
+           })
+        }catch (error){
+
+        }
+    }
+    
     return (
         <div className="container">
             <div className="card o-hidden border-0 shadow-lg my-5">
@@ -110,4 +132,4 @@ function Createuser() {
     )
 }
 
-export default Createuser
+export default Edituser
