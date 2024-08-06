@@ -6,7 +6,7 @@ function Userview() {
   const params = useParams()
 
   const [searchParams, setSearchParams] = useSearchParams()
-  console.log(...searchParams)
+  console.log("vijay-check",...searchParams)
 
   const [userData, setUserData] = useState({})
 
